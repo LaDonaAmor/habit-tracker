@@ -12,8 +12,11 @@ export function calculateCurrentStreak(
   completions: string[],
   today?: string,
 ): number {
+  const uniqueDates = [...new Set(completions)];
+  const sortedDates = uniqueDates.sort();
+
   const ref = today ?? todayISO();
-  const set = new Set(completions);
+  const set = new Set(sortedDates);
   if (!set.has(ref)) return 0;
 
   let streak = 0;
