@@ -1,11 +1,6 @@
 import type { User, Session } from "@/types/auth";
 import type { Habit } from "@/types/habit";
-
-export const STORAGE_KEYS = {
-  users: "habit-tracker-users",
-  session: "habit-tracker-session",
-  habits: "habit-tracker-habits",
-} as const;
+import { STORAGE_KEYS } from "./constants";
 
 const isBrowser = () => typeof window !== "undefined";
 
@@ -25,14 +20,14 @@ function write<T>(key: string, value: T): void {
 }
 
 export const storage = {
-  getUsers: (): User[] => read<User[]>(STORAGE_KEYS.users, []),
-  setUsers: (u: User[]) => write(STORAGE_KEYS.users, u),
+  getUsers: (): User[] => read<User[]>(STORAGE_KEYS.USERS, []),
+  setUsers: (u: User[]) => write(STORAGE_KEYS.USERS, u),
   getSession: (): Session | null =>
-    read<Session | null>(STORAGE_KEYS.session, null),
-  setSession: (s: Session | null) => write(STORAGE_KEYS.session, s),
+    read<Session | null>(STORAGE_KEYS.SESSION, null),
+  setSession: (s: Session | null) => write(STORAGE_KEYS.SESSION, s),
   clearSession: () => {
-    if (isBrowser()) window.localStorage.removeItem(STORAGE_KEYS.session);
+    if (isBrowser()) window.localStorage.removeItem(STORAGE_KEYS.SESSION);
   },
-  getHabits: (): Habit[] => read<Habit[]>(STORAGE_KEYS.habits, []),
-  setHabits: (h: Habit[]) => write(STORAGE_KEYS.habits, h),
+  getHabits: (): Habit[] => read<Habit[]>(STORAGE_KEYS.HABITS, []),
+  setHabits: (h: Habit[]) => write(STORAGE_KEYS.HABITS, h),
 };

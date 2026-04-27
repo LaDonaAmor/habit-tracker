@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { login } from "@/lib/auth";
 import Link from "next/link";
+import { ROUTES } from "@/lib/constants";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function LoginForm() {
       setError(res.error ?? "An unexpected error occurred");
       return;
     }
-    router.push("/dashboard");
+    router.push(ROUTES.DASHBOARD);
   }
 
   return (
