@@ -1,4 +1,4 @@
-function todayISO(): string {
+export function getTodayISO(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
@@ -15,7 +15,7 @@ export function calculateCurrentStreak(
   const uniqueDates = [...new Set(completions)];
   const sortedDates = uniqueDates.sort();
 
-  const ref = today ?? todayISO();
+  const ref = today ?? getTodayISO();
   const set = new Set(sortedDates);
   if (!set.has(ref)) return 0;
 
