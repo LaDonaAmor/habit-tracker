@@ -64,7 +64,7 @@ export default function HabitCard({
           className={`cursor-pointer rounded-xl px-3 py-2 text-sm font-medium transition
       ${
         completedToday
-          ? "border border-border text-emerald-800 hover:bg-cream"
+          ? "border border-border text-emerald-500 hover:bg-emerald-50  hover:border-emerald-400"
           : "bg-primary text-white hover:opacity-90"
       }
     `}

@@ -5,7 +5,6 @@
 @theme {
   --color-bg: #f8fafc;
   --color-card: #ffffff;
-  --color-cream: #fdfbf7;
   --color-ink: #0f172a;
   --color-muted: #64748b;
   --color-border: #e2e8f0;
@@ -30,7 +29,6 @@
   --color-bg: #0f172a;
   --color-card: #1e293b;
   --color-ink: #f8fafc;
-  --color-cream-dark: #1e293b;
   --color-muted: #94a3b8;
   --color-border: #334155;
 
@@ -81,10 +79,6 @@ body {
   padding: 0.65rem 1rem;
   font-weight: 500;
   transition: all 0.2s ease;
-}
-
-@utility bg-cream {
-  background-color: var(--color-cream);
 }
 
 .btn-primary:hover {
