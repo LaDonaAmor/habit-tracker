@@ -68,7 +68,7 @@ export default function LoginForm() {
         <button
           data-testid="auth-login-submit"
           type="submit"
-          className="btn-primary w-full"
+          className="cursor-pointer btn-primary w-full"
         >
           Log in
         </button>

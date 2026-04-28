@@ -12,14 +12,12 @@ export default function SplashScreen() {
           {APP_NAME}
         </h1>
 
-        {/* Subtext */}
         <p className="text-sm text-muted">Building consistency...</p>
 
-        {/* Loader */}
-        <div className="mt-2 flex gap-1">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-accent-peach" />
-          <span className="h-2 w-2 animate-pulse rounded-full bg-accent-sage [animation-delay:150ms]" />
-          <span className="h-2 w-2 animate-pulse rounded-full bg-accent-rose [animation-delay:300ms]" />
+        <div className="mt-2 flex gap-1.5">
+          <span className="h-2 w-2 animate-bounce rounded-full bg-primary" />
+          <span className="h-2 w-2 animate-bounce rounded-full bg-primary [animation-delay:150ms]" />
+          <span className="h-2 w-2 animate-bounce rounded-full bg-primary [animation-delay:300ms]" />
         </div>
       </div>
     </div>

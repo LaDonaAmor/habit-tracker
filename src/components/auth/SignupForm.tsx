@@ -66,7 +66,7 @@ export default function SignupForm() {
         <button
           data-testid="auth-signup-submit"
           type="submit"
-          className="btn-primary w-full"
+          className="cursor-pointer btn-primary w-full"
         >
           Sign up
         </button>

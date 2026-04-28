@@ -31,8 +31,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       className="
-        flex items-center gap-1.5 bg-card
-        transition rounded-xl border border-warm bg-cream px-3 py-1.5 text-sm hover:bg-card
+        cursor-pointer rounded-xl border border-warm bg-cream px-3 py-1.5 text-sm hover:bg-card
       "
       aria-label="Toggle theme"
     >

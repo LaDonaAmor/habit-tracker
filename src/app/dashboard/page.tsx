@@ -116,15 +116,13 @@ export default function DashboardPage() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
-              <ThemeToggle />
-
               <a
                 href="/profile"
                 className="rounded-xl border border-warm bg-cream px-3 py-1.5 text-sm hover:bg-card"
               >
                 Profile
               </a>
-
+              <ThemeToggle />
               <LogoutButton />
             </div>
           </header>
@@ -133,7 +131,7 @@ export default function DashboardPage() {
             <button
               data-testid="create-habit-button"
               onClick={() => setShowForm(true)}
-              className="btn-primary rounded-lg border border-warm px-3 py-2"
+              className="cursor-pointer btn-primary rounded-lg border border-warm px-3 py-2"
             >
               + New habit
             </button>

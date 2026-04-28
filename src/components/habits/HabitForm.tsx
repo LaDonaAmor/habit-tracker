@@ -41,7 +41,6 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
       onSubmit={onSubmit}
       className="space-y-5 rounded-2xl border border-warm bg-card p-6 shadow-soft"
     >
-      {/* Header */}
       <div>
         <h2 className="font-serif text-xl text-ink">
           {initial ? "Edit Habit" : "Create Habit"}
@@ -51,7 +50,6 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
         </p>
       </div>
 
-      {/* Name */}
       <label className="block">
         <span className="text-sm font-medium text-ink">Habit name</span>
         <input
@@ -64,7 +62,6 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
         />
       </label>
 
-      {/* Description */}
       <label className="block">
         <span className="text-sm font-medium text-ink">Description</span>
         <input
@@ -76,20 +73,18 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
         />
       </label>
 
-      {/* Frequency */}
       <label className="block">
         <span className="text-sm font-medium text-ink">Frequency</span>
         <select
           data-testid="habit-frequency-select"
           value="daily"
           onChange={() => {}}
-          className="mt-2 w-full"
+          className="cursor-pointer mt-2 w-full"
         >
           <option value="daily">Daily</option>
         </select>
       </label>
 
-      {/* Error */}
       {error && (
         <p
           role="alert"
@@ -99,12 +94,11 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
         </p>
       )}
 
-      {/* Actions */}
       <div className="flex gap-2 pt-2">
         <button
           data-testid="habit-save-button"
           type="submit"
-          className="btn-primary flex-1"
+          className="cursor-pointer btn-primary flex-1"
         >
           Save Habit
         </button>
@@ -113,7 +107,7 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
           <button
             type="button"
             onClick={onCancel}
-            className="rounded-xl border border-warm bg-card px-4 py-2 text-ink hover:bg-cream"
+            className="cursor-pointer rounded-xl border border-warm bg-card px-4 py-2 text-ink hover:bg-cream"
           >
             Cancel
           </button>

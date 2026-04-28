@@ -15,7 +15,7 @@ export default function LogoutButton() {
         logout();
         router.push(ROUTES.LOGIN);
       }}
-      className="btn-primary rounded-lg border border-warm px-3 py-2"
+      className="cursor-pointer btn-primary rounded-lg border border-warm px-3 py-2"
     >
       Log out
     </button>

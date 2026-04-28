@@ -26,7 +26,6 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen bg-app text-ink">
         {" "}
-        {/* GLOBAL TOP BAR (accessible everywhere) */}
         <div className="fixed right-4 top-4 z-50"></div>
         {children}
         <PWARegister />

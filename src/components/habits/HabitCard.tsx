@@ -35,7 +35,6 @@ export default function HabitCard({
       ${completedToday ? "border border-accent-sage/40" : "border border-border-warm"}
     `}
     >
-      {/* Header */}
       <header className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
           <h3 className="truncate font-serif text-lg font-semibold text-ink">
@@ -51,34 +50,37 @@ export default function HabitCard({
 
         <span
           data-testid={`habit-streak-${slug}`}
-          className="shrink-0 rounded-full border border-warm bg-cream px-2.5 py-1 text-xs"
+          className="shrink-0 rounded-full border border-warm bg-cream px-2.5 py-1 text-sm"
         >
           🔥 {streak}
         </span>
       </header>
 
-      {/* Actions (compact row) */}
       <div className="mt-4 flex items-center gap-2">
         <button
           data-testid={`habit-complete-${slug}`}
           type="button"
           onClick={() => onToggleToday(habit.id)}
-          className={`
-          rounded-lg px-3 py-1.5 text-xs font-medium transition
-          ${
-            completedToday
-              ? "border border-warm bg-cream text-ink"
-              : "bg-accent-sage text-white"
-          }
-        `}
+          className={`cursor-pointer rounded-xl px-3 py-2 text-sm font-medium transition
+      ${
+        completedToday
+          ? "border border-border text-emerald-800 hover:bg-cream"
+          : "bg-primary text-white hover:opacity-90"
+      }
+    `}
         >
-          {completedToday ? "Undo" : "Done"}
+          {completedToday ? "✓ Done" : "Mark done"}
         </button>
 
         <button
           type="button"
           onClick={() => onEdit(habit.id)}
-          className="rounded-lg border border-warm bg-transparent px-3 py-1.5 text-xs text-ink hover:bg-cream"
+          className="cursor-pointer
+      rounded-xl border border-border
+      bg-transparent px-3 py-2 text-sm font-medium text-ink
+      hover:bg-cream hover:border-primary
+      hover:text-primary transition
+    "
         >
           Edit
         </button>
@@ -86,13 +88,17 @@ export default function HabitCard({
         <button
           type="button"
           onClick={() => setConfirming(true)}
-          className="rounded-lg border border-red-200 bg-transparent px-3 py-1.5 text-xs text-red-400 hover:bg-red-50"
+          className="cursor-pointer
+      rounded-xl border border-red-200
+      bg-transparent px-3 py-2 text-sm font-medium text-red-500
+      hover:bg-red-50 hover:border-red-400
+      transition
+    "
         >
           Delete
         </button>
       </div>
 
-      {/* Confirm delete */}
       {confirming && (
         <div className="mt-4 rounded-xl border border-warm bg-card p-3">
           <p className="text-sm text-ink">Delete this habit?</p>
@@ -103,14 +109,14 @@ export default function HabitCard({
                 setConfirming(false);
                 onDelete(habit.id);
               }}
-              className="rounded-lg bg-red-600 px-3 py-1.5 text-xs text-white"
+              className="cursor-pointer rounded-lg bg-red-600 px-3 py-1.5 text-sm text-white"
             >
               Delete
             </button>
 
             <button
               onClick={() => setConfirming(false)}
-              className="rounded-lg border border-warm px-3 py-1.5 text-xs"
+              className="cursor-pointer rounded-lg border border-warm px-3 py-1.5 text-sm"
             >
               Cancel
             </button>

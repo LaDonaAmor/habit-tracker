@@ -25,16 +25,18 @@ export default function ProfilePage() {
         <div className="mx-auto max-w-xl space-y-6">
           <div className="rounded-2xl bg-card p-6">
             <div className="flex items-center justify-between">
-              <a
-                href="/dashboard"
-                className="rounded-xl border border-warm bg-cream px-3 py-1.5 text-sm hover:bg-card"
-              >
-                Back
-              </a>
+              <h1 className="text-2xl font-bold">Your Profile</h1>
+              <div className="flex items-center gap-2">
+                <a
+                  href="/dashboard"
+                  className="cursor-pointer rounded-xl border border-warm bg-cream px-3 py-1.5 text-sm hover:bg-card"
+                >
+                  Back
+                </a>
 
-              <ThemeToggle />
+                <ThemeToggle />
+              </div>
             </div>
-            <h1 className="text-2xl font-bold">Your Profile</h1>
 
             <div className="mt-4 space-y-2 text-sm text-muted">
               <p>
