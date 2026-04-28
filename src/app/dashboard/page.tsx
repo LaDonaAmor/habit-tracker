@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 
 import type { Session } from "@/types/auth";
 import type { Habit } from "@/types/habit";
@@ -12,6 +13,7 @@ import HabitList from "@/components/habits/HabitList";
 import HabitForm from "@/components/habits/HabitForm";
 import LogoutButton from "@/components/auth/LogoutButton";
 import ProtectedRoute from "@/components/shared/ProtectedRoute";
+import ThemeToggle from "@/components/shared/ThemeToggle";
 
 const todayISO = () => new Date().toISOString().slice(0, 10);
 const uid = () =>
@@ -92,29 +94,51 @@ export default function DashboardPage() {
     <ProtectedRoute>
       <main className="min-h-screen bg-cream px-4 py-8">
         <div className="mx-auto max-w-3xl space-y-6">
-          {/* Header */}
-          <header className="bg-card card-hover flex items-center justify-between p-5">
-            <div>
-              <h1 className="text-2xl font-bold">Your habits</h1>
-              <p className="text-muted text-sm">
-                Track consistency, build discipline
-              </p>
+          <header className="bg-card flex items-center justify-between p-5">
+            <div className="flex items-center gap-3">
+              <div className="rounded-xl bg-card p-2">
+                <Image
+                  src="/icons/icon-192.png"
+                  alt="Logo"
+                  width={48} // Use the actual size you want it to render at
+                  height={48} // matching the h-12 w-12 or similar classes
+                  className="h-6 w-6"
+                  priority // Add this since it's an icon in the header
+                />
+              </div>
+
+              <div>
+                <h1 className="text-2xl font-bold">Your habits</h1>
+                <p className="text-muted text-sm">
+                  Track consistency, build discipline
+                </p>
+              </div>
             </div>
-            <LogoutButton />
+
+            <div className="flex items-center gap-2 sm:gap-3">
+              <ThemeToggle />
+
+              <a
+                href="/profile"
+                className="rounded-xl border border-warm bg-cream px-3 py-1.5 text-sm hover:bg-card"
+              >
+                Profile
+              </a>
+
+              <LogoutButton />
+            </div>
           </header>
 
-          {/* Create Button */}
           {!showForm && !editing && (
             <button
               data-testid="create-habit-button"
               onClick={() => setShowForm(true)}
-              className="btn-primary w-full"
+              className="btn-primary rounded-lg border border-warm px-3 py-2"
             >
               + New habit
             </button>
           )}
 
-          {/* Forms */}
           {showForm && (
             <div className="bg-card p-4">
               <HabitForm
@@ -134,7 +158,6 @@ export default function DashboardPage() {
             </div>
           )}
 
-          {/* Habit List */}
           <div className="bg-card p-4">
             <HabitList
               habits={myHabits}

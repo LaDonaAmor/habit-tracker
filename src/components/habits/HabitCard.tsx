@@ -29,26 +29,21 @@ export default function HabitCard({
     <article
       data-testid={`habit-card-${slug}`}
       className={`
-        group relative h-full
-        rounded-2xl border bg-card shadow-soft card-hover
-        flex flex-col
-        p-4 sm:p-5 lg:p-6
-        transition-all
-        ${
-          completedToday
-            ? "border-accent-sage/60 bg-accent-sage/5"
-            : "border-border-warm"
-        }
-      `}
+      group relative flex flex-col
+      rounded-2xl bg-card p-5 sm:p-6
+      transition-all duration-200 card-hover
+      ${completedToday ? "border border-accent-sage/40" : "border border-border-warm"}
+    `}
     >
+      {/* Header */}
       <header className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <h3 className="font-serif text-lg sm:text-xl font-semibold text-ink truncate">
+          <h3 className="truncate font-serif text-lg font-semibold text-ink">
             {habit.name}
           </h3>
 
           {habit.description && (
-            <p className="mt-1 text-sm text-muted line-clamp-2">
+            <p className="mt-1 line-clamp-2 text-sm text-muted">
               {habit.description}
             </p>
           )}
@@ -56,31 +51,34 @@ export default function HabitCard({
 
         <span
           data-testid={`habit-streak-${slug}`}
-          className="shrink-0 rounded-full bg-cream px-3 py-1 text-xs font-medium border border-warm"
+          className="shrink-0 rounded-full border border-warm bg-cream px-2.5 py-1 text-xs"
         >
           🔥 {streak}
         </span>
       </header>
 
-      <div className="mt-auto pt-4 flex flex-wrap gap-2">
+      {/* Actions (compact row) */}
+      <div className="mt-4 flex items-center gap-2">
         <button
           data-testid={`habit-complete-${slug}`}
           type="button"
           onClick={() => onToggleToday(habit.id)}
-          className={`rounded-xl px-3 sm:px-4 py-2 text-sm font-medium transition
-            ${
-              completedToday
-                ? "bg-cream text-ink border border-warm"
-                : "bg-accent-sage text-white hover:opacity-90"
-            }`}
+          className={`
+          rounded-lg px-3 py-1.5 text-xs font-medium transition
+          ${
+            completedToday
+              ? "border border-warm bg-cream text-ink"
+              : "bg-accent-sage text-white"
+          }
+        `}
         >
-          {completedToday ? "Undo" : "Complete"}
+          {completedToday ? "Undo" : "Done"}
         </button>
 
         <button
           type="button"
           onClick={() => onEdit(habit.id)}
-          className="rounded-xl border border-warm bg-card px-3 sm:px-4 py-2 text-sm text-ink hover:bg-cream"
+          className="rounded-lg border border-warm bg-transparent px-3 py-1.5 text-xs text-ink hover:bg-cream"
         >
           Edit
         </button>
@@ -88,14 +86,15 @@ export default function HabitCard({
         <button
           type="button"
           onClick={() => setConfirming(true)}
-          className="rounded-xl border border-red-200 bg-red-50 px-3 sm:px-4 py-2 text-sm text-red-600 hover:bg-red-100"
+          className="rounded-lg border border-red-200 bg-transparent px-3 py-1.5 text-xs text-red-400 hover:bg-red-50"
         >
           Delete
         </button>
       </div>
 
+      {/* Confirm delete */}
       {confirming && (
-        <div className="mt-4 rounded-xl border border-warm bg-card p-4 shadow-soft">
+        <div className="mt-4 rounded-xl border border-warm bg-card p-3">
           <p className="text-sm text-ink">Delete this habit?</p>
 
           <div className="mt-3 flex gap-2">
@@ -104,14 +103,14 @@ export default function HabitCard({
                 setConfirming(false);
                 onDelete(habit.id);
               }}
-              className="rounded-xl bg-red-600 px-3 py-2 text-sm text-white"
+              className="rounded-lg bg-red-600 px-3 py-1.5 text-xs text-white"
             >
               Delete
             </button>
 
             <button
               onClick={() => setConfirming(false)}
-              className="rounded-xl border border-warm px-3 py-2 text-sm"
+              className="rounded-lg border border-warm px-3 py-1.5 text-xs"
             >
               Cancel
             </button>
