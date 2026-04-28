@@ -1,13 +1,6 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Habit Tracker app", () => {
-  test.beforeEach(async ({ page }) => {
-    // IMPORTANT: clear BEFORE navigation
-    await page.addInitScript(() => {
-      localStorage.clear();
-    });
-  });
-
   test("shows the splash screen and redirects unauthenticated users to /login", async ({
     page,
   }) => {
