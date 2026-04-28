@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { login } from "@/lib/auth";
 import Link from "next/link";
 import { ROUTES } from "@/lib/constants";
