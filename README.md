@@ -1,6 +1,6 @@
 # Habit Tracker PWA
 
-A mobile-first Habit Tracker Progressive Web App built with Next.js (App Router), TypeScript, Tailwind CSS, and localStorage persistence.
+A mobile-first Habit Tracker built with Next.js (App Router), TypeScript, and Tailwind CSS, using localStorage for persistence and supporting Progressive Web App (PWA) capabilities.
 
 This project implements all requirements defined in the Stage 3 Technical Requirements Document (TRD).
 
@@ -37,7 +37,14 @@ The app is designed to be:
 
 ## Setup Instructions
 
-Clone the repository and install dependencies:
+Clone the repository:
+
+```bash
+git clone https://github.com/LaDonaAmor/habit-tracker.git
+cd habit-tracker
+```
+
+Install dependencies:
 
 ```bash
 npm install

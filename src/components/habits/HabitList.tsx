@@ -20,17 +20,18 @@ export default function HabitList({
     return (
       <div
         data-testid="empty-state"
-        className="rounded border border-dashed p-8 text-center text-gray-600"
+        className="mt-10 rounded-2xl border border-warm bg-card p-10 text-center"
       >
-        No habits yet. Create your first one!
+        <h3 className="font-serif text-2xl text-ink">No habits yet</h3>
+        <p className="mt-2 text-muted">
+          Create your first habit and start building consistency.
+        </p>
       </div>
     );
   }
+
   return (
-    <ul
-      className="grid gap-3 md:grid-cols-2 lg:grid-cols-3"
-      data-testid="habit-list"
-    >
+    <ul data-testid="habit-list" className="mt-6 space-y-4">
       {habits.map((h) => (
         <li key={h.id}>
           <HabitCard

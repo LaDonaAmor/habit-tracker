@@ -27,6 +27,7 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
       setError(v.error);
       return;
     }
+
     onSave({
       name: v.value,
       description: description.trim(),
@@ -38,56 +39,75 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
     <form
       data-testid="habit-form"
       onSubmit={onSubmit}
-      className="space-y-3 rounded border p-4"
+      className="space-y-5 rounded-2xl border border-warm bg-card p-6 shadow-soft"
     >
-      <label htmlFor="habit-name" className="block">
-        <span className="block text-sm">Habit name</span>
+      <div>
+        <h2 className="font-serif text-xl text-ink">
+          {initial ? "Edit Habit" : "Create Habit"}
+        </h2>
+        <p className="mt-1 text-sm text-muted">
+          Build consistency one habit at a time.
+        </p>
+      </div>
+
+      <label className="block">
+        <span className="text-sm font-medium text-ink">Habit name</span>
         <input
           id="habit-name"
           data-testid="habit-name-input"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="mt-1 w-full rounded border px-3 py-2"
+          placeholder="e.g. Drink water"
+          className="mt-2 w-full"
         />
       </label>
+
       <label className="block">
-        <span className="block text-sm">Description</span>
+        <span className="text-sm font-medium text-ink">Description</span>
         <input
           data-testid="habit-description-input"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="mt-1 w-full rounded border px-3 py-2"
+          placeholder="Optional details..."
+          className="mt-2 w-full"
         />
       </label>
+
       <label className="block">
-        <span className="block text-sm">Frequency</span>
+        <span className="text-sm font-medium text-ink">Frequency</span>
         <select
           data-testid="habit-frequency-select"
           value="daily"
           onChange={() => {}}
-          className="mt-1 w-full rounded border px-3 py-2"
+          className="cursor-pointer mt-2 w-full"
         >
           <option value="daily">Daily</option>
         </select>
       </label>
+
       {error && (
-        <p role="alert" className="text-sm text-red-600">
+        <p
+          role="alert"
+          className="rounded-xl border border-red-200 bg-red-50 p-2 text-sm text-red-600"
+        >
           {error}
         </p>
       )}
-      <div className="flex gap-2">
+
+      <div className="flex gap-2 pt-2">
         <button
           data-testid="habit-save-button"
           type="submit"
-          className="rounded bg-blue-600 px-4 py-2 text-white"
+          className="cursor-pointer btn-primary flex-1"
         >
-          Save
+          Save Habit
         </button>
+
         {onCancel && (
           <button
             type="button"
             onClick={onCancel}
-            className="rounded border px-4 py-2"
+            className="cursor-pointer rounded-xl border border-warm bg-card px-4 py-2 text-ink hover:bg-cream"
           >
             Cancel
           </button>
