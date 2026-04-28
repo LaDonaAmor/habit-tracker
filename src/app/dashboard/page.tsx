@@ -1,21 +1,29 @@
 "use client";
 
 import { useMemo, useState } from "react";
+
 import Image from "next/image";
 
 import type { Session } from "@/types/auth";
+
 import type { Habit } from "@/types/habit";
 
 import { storage } from "@/lib/storage";
+
 import { toggleHabitCompletion } from "@/lib/habits";
 
 import HabitList from "@/components/habits/HabitList";
+
 import HabitForm from "@/components/habits/HabitForm";
+
 import LogoutButton from "@/components/auth/LogoutButton";
+
 import ProtectedRoute from "@/components/shared/ProtectedRoute";
+
 import ThemeToggle from "@/components/shared/ThemeToggle";
 
 const todayISO = () => new Date().toISOString().slice(0, 10);
+
 const uid = () =>
   typeof crypto !== "undefined" && "randomUUID" in crypto
     ? crypto.randomUUID()
@@ -23,44 +31,60 @@ const uid = () =>
 
 export default function DashboardPage() {
   const [session] = useState<Session | null>(() => storage.getSession());
+
   const [habits, setHabits] = useState<Habit[]>(() => storage.getHabits());
+
   const [showForm, setShowForm] = useState(false);
+
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const myHabits = useMemo(
     () => (session ? habits.filter((h) => h.userId === session.userId) : []),
+
     [habits, session],
   );
 
   function persist(next: Habit[]) {
     setHabits(next);
+
     storage.setHabits(next);
   }
 
   function handleCreate(data: {
     name: string;
+
     description: string;
+
     frequency: "daily";
   }) {
     if (!session) return;
 
     const habit: Habit = {
       id: uid(),
+
       userId: session.userId,
+
       name: data.name,
+
       description: data.description,
+
       frequency: "daily",
+
       createdAt: new Date().toISOString(),
+
       completions: [],
     };
 
     persist([...habits, habit]);
+
     setShowForm(false);
   }
 
   function handleEditSave(data: {
     name: string;
+
     description: string;
+
     frequency: "daily";
   }) {
     if (!editingId) return;
@@ -114,6 +138,7 @@ export default function DashboardPage() {
                 <h1 className="text-xl font-bold leading-tight sm:text-2xl">
                   Your habits
                 </h1>
+
                 <p className="text-muted text-xs sm:block sm:text-sm">
                   Track consistency, build discipline
                 </p>
@@ -128,6 +153,7 @@ export default function DashboardPage() {
                 >
                   Profile
                 </a>
+
                 <ThemeToggle />
               </div>
 

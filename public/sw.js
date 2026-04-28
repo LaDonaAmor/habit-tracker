@@ -1,4 +1,4 @@
-const CACHE = "habit-tracker-shell-v1";
+const CACHE = "habit-tracker-shell-v1.2";
 const SHELL = ["/", "/login", "/signup", "/dashboard", "/manifest.json"];
 
 self.addEventListener("install", (event) => {
@@ -27,21 +27,22 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
+
   event.respondWith(
-    caches.match(req).then((cached) => {
-      if (cached) return cached;
-      return fetch(req)
-        .then((res) => {
-          const copy = res.clone();
-          caches
-            .open(CACHE)
-            .then((c) => c.put(req, copy))
-            .catch(() => {});
-          return res;
-        })
-        .catch(
-          () => caches.match("/") || new Response("Offline", { status: 200 }),
-        );
-    }),
+    caches
+      .open(CACHE)
+      .then((cache) => {
+        return cache.match(req).then((cachedResponse) => {
+          const fetchPromise = fetch(req).then((networkResponse) => {
+            cache.put(req, networkResponse.clone());
+            return networkResponse;
+          });
+
+          return cachedResponse || fetchPromise;
+        });
+      })
+      .catch(() => {
+        return caches.match("/") || new Response("Offline", { status: 200 });
+      }),
   );
 });
