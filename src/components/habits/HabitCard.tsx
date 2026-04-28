@@ -37,10 +37,21 @@ export default function HabitCard({
     >
       <header className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <h3 className="truncate font-serif text-lg font-semibold text-ink">
-            {habit.name}
-          </h3>
+          <h3
+            className={`truncate font-serif text-lg font-semibold transition-colors duration-30 
+              ${completedToday ? "text-muted" : "text-ink"}`}
+          >
+            <span className="relative inline-block">
+              {habit.name}
 
+              <span
+                className={`
+        absolute left-0 top-[55%] h-0.5 w-full bg-success/70 transition-transform duration-500 origin-left
+        ${completedToday ? "scale-x-100" : "scale-x-0"}
+      `}
+              />
+            </span>
+          </h3>
           {habit.description && (
             <p className="mt-1 line-clamp-2 text-sm text-muted">
               {habit.description}

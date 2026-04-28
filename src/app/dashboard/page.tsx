@@ -94,36 +94,43 @@ export default function DashboardPage() {
     <ProtectedRoute>
       <main className="min-h-screen bg-cream px-4 py-8">
         <div className="mx-auto max-w-3xl space-y-6">
-          <header className="bg-card flex items-center justify-between p-5">
+          <header className="bg-card flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
             <div className="flex items-center gap-3">
-              <div className="rounded-xl bg-card p-2">
+              <div className="shrink-0 rounded-xl p-2">
                 <Image
                   src="/icons/icon-192.png"
                   alt="Logo"
-                  width={48} // Use the actual size you want it to render at
-                  height={48} // matching the h-12 w-12 or similar classes
-                  className="h-6 w-6"
-                  priority // Add this since it's an icon in the header
+                  width={48}
+                  height={48}
+                  className="h-6 w-6 sm:h-8 sm:w-8"
+                  priority
                 />
               </div>
 
-              <div>
-                <h1 className="text-2xl font-bold">Your habits</h1>
-                <p className="text-muted text-sm">
+              <div className="min-w-0">
+                <h1 className="text-xl font-bold leading-tight sm:text-2xl">
+                  Your habits
+                </h1>
+                <p className="text-muted text-xs sm:block sm:text-sm">
                   Track consistency, build discipline
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3">
-              <a
-                href="/profile"
-                className="rounded-xl border border-warm bg-cream px-3 py-1.5 text-sm hover:bg-card"
-              >
-                Profile
-              </a>
-              <ThemeToggle />
-              <LogoutButton />
+            <div className="flex items-center justify-between border-t border-border pt-3 sm:border-none sm:pt-0 sm:gap-3">
+              <div className="flex items-center gap-2">
+                <a
+                  href="/profile"
+                  className="rounded-xl border border-border bg-cream px-3 py-1.5 text-xs font-medium hover:bg-card sm:text-sm"
+                >
+                  Profile
+                </a>
+                <ThemeToggle />
+              </div>
+
+              <div className="flex items-center gap-2">
+                <LogoutButton />
+              </div>
             </div>
           </header>
 
@@ -131,7 +138,7 @@ export default function DashboardPage() {
             <button
               data-testid="create-habit-button"
               onClick={() => setShowForm(true)}
-              className="cursor-pointer btn-primary rounded-lg border border-warm px-3 py-2"
+              className="cursor-pointer btn-primary flex items-center justify-center gap-2 p-3 sm:w-auto sm:px-5"
             >
               + New habit
             </button>

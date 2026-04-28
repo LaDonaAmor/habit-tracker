@@ -81,6 +81,14 @@ body {
   transition: all 0.2s ease;
 }
 
+@utility strike-active {
+  @apply text-muted;
+  &::after {
+    content: "";
+    @apply absolute left-0 top-1/2 h-0.5 w-full -translate-y-1/2 bg-success/60;
+  }
+}
+
 .btn-primary:hover {
   filter: brightness(1.05);
   transform: translateY(-2px);
