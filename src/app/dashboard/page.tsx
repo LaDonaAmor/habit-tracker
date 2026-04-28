@@ -41,6 +41,7 @@ export default function DashboardPage() {
     frequency: "daily";
   }) {
     if (!session) return;
+
     const habit: Habit = {
       id: uid(),
       userId: session.userId,
@@ -50,6 +51,7 @@ export default function DashboardPage() {
       createdAt: new Date().toISOString(),
       completions: [],
     };
+
     persist([...habits, habit]);
     setShowForm(false);
   }
@@ -60,13 +62,15 @@ export default function DashboardPage() {
     frequency: "daily";
   }) {
     if (!editingId) return;
+
     persist(
       habits.map((h) =>
         h.id === editingId
-          ? { ...h, name: data.name, description: data.description } // preserves id, userId, createdAt, completions
+          ? { ...h, name: data.name, description: data.description }
           : h,
       ),
     );
+
     setEditingId(null);
   }
 
@@ -86,47 +90,60 @@ export default function DashboardPage() {
 
   return (
     <ProtectedRoute>
-      <main
-        data-testid="dashboard-page"
-        className="mx-auto max-w-2xl space-y-4 p-4"
-      >
-        <header className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Your habits</h1>
-          <LogoutButton />
-        </header>
+      <main className="min-h-screen bg-cream px-4 py-8">
+        <div className="mx-auto max-w-3xl space-y-6">
+          {/* Header */}
+          <header className="bg-card card-hover flex items-center justify-between p-5">
+            <div>
+              <h1 className="text-2xl font-bold">Your habits</h1>
+              <p className="text-muted text-sm">
+                Track consistency, build discipline
+              </p>
+            </div>
+            <LogoutButton />
+          </header>
 
-        {!showForm && !editing && (
-          <button
-            data-testid="create-habit-button"
-            type="button"
-            onClick={() => setShowForm(true)}
-            className="rounded bg-blue-600 px-4 py-2 text-white"
-          >
-            + New habit
-          </button>
-        )}
+          {/* Create Button */}
+          {!showForm && !editing && (
+            <button
+              data-testid="create-habit-button"
+              onClick={() => setShowForm(true)}
+              className="btn-primary w-full"
+            >
+              + New habit
+            </button>
+          )}
 
-        {showForm && (
-          <HabitForm
-            onSave={handleCreate}
-            onCancel={() => setShowForm(false)}
-          />
-        )}
+          {/* Forms */}
+          {showForm && (
+            <div className="bg-card p-4">
+              <HabitForm
+                onSave={handleCreate}
+                onCancel={() => setShowForm(false)}
+              />
+            </div>
+          )}
 
-        {editing && (
-          <HabitForm
-            initial={editing}
-            onSave={handleEditSave}
-            onCancel={() => setEditingId(null)}
-          />
-        )}
+          {editing && (
+            <div className="bg-card p-4">
+              <HabitForm
+                initial={editing}
+                onSave={handleEditSave}
+                onCancel={() => setEditingId(null)}
+              />
+            </div>
+          )}
 
-        <HabitList
-          habits={myHabits}
-          onToggleToday={handleToggleToday}
-          onEdit={(id) => setEditingId(id)}
-          onDelete={handleDelete}
-        />
+          {/* Habit List */}
+          <div className="bg-card p-4">
+            <HabitList
+              habits={myHabits}
+              onToggleToday={handleToggleToday}
+              onEdit={(id) => setEditingId(id)}
+              onDelete={handleDelete}
+            />
+          </div>
+        </div>
       </main>
     </ProtectedRoute>
   );

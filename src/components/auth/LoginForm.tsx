@@ -27,45 +27,59 @@ export default function LoginForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="mx-auto max-w-sm space-y-4 p-6">
-      <h1 className="text-2xl font-bold">Log in</h1>
-      <label htmlFor="email-input" className="block">
-        <span className="block text-sm">Email</span>
-        <input
-          type="email"
-          data-testid="auth-login-email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 w-full rounded border px-3 py-2"
-        />
-      </label>
-      <label htmlFor="password-input" className="block">
-        <span className="block text-sm">Password</span>
-        <input
-          type="password"
-          data-testid="auth-login-password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="mt-1 w-full rounded border px-3 py-2"
-        />
-      </label>
-      {error && (
-        <p role="alert" className="text-sm text-red-600">
-          {error}
-        </p>
-      )}
-      <button
-        data-testid="auth-login-submit"
-        type="submit"
-        className="w-full rounded bg-blue-600 py-2 text-white"
+    <div className="flex min-h-screen items-center justify-center bg-cream px-4">
+      <form
+        onSubmit={onSubmit}
+        className="bg-card w-full max-w-md space-y-5 p-6 card-hover"
       >
-        Log in
-      </button>
-      <p className="text-sm">
-        No account? <Link href="/signup">Sign up</Link>
-      </p>
-    </form>
+        <div>
+          <h1 className="text-2xl font-bold">Welcome back</h1>
+          <p className="text-muted text-sm">
+            Login to continue tracking habits
+          </p>
+        </div>
+
+        <label className="block">
+          <span className="text-sm text-muted">Email</span>
+          <input
+            type="email"
+            data-testid="auth-login-email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="mt-1 w-full"
+          />
+        </label>
+
+        <label className="block">
+          <span className="text-sm text-muted">Password</span>
+          <input
+            type="password"
+            data-testid="auth-login-password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="mt-1 w-full"
+          />
+        </label>
+
+        {error && <p className="text-sm text-red-400">{error}</p>}
+
+        <button
+          data-testid="auth-login-submit"
+          type="submit"
+          className="btn-primary w-full"
+        >
+          Log in
+        </button>
+
+        <p className="text-sm text-muted">
+          No account?{" "}
+          <Link className="text-sky-400 hover:underline" href="/signup">
+            Sign up
+          </Link>
+        </p>
+      </form>
+    </div>
   );
 }

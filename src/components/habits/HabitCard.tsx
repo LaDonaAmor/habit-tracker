@@ -28,71 +28,90 @@ export default function HabitCard({
   return (
     <article
       data-testid={`habit-card-${slug}`}
-      className={`rounded border p-4 ${completedToday ? "bg-green-50 border-green-400" : "bg-white"}`}
+      className={`
+        group relative h-full
+        rounded-2xl border bg-card shadow-soft card-hover
+        flex flex-col
+        p-4 sm:p-5 lg:p-6
+        transition-all
+        ${
+          completedToday
+            ? "border-accent-sage/60 bg-accent-sage/5"
+            : "border-border-warm"
+        }
+      `}
     >
-      <header className="flex items-start justify-between gap-2">
-        <div>
-          <h3 className="text-lg font-semibold">{habit.name}</h3>
+      <header className="flex items-start justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <h3 className="font-serif text-lg sm:text-xl font-semibold text-ink truncate">
+            {habit.name}
+          </h3>
+
           {habit.description && (
-            <p className="text-sm text-gray-600">{habit.description}</p>
+            <p className="mt-1 text-sm text-muted line-clamp-2">
+              {habit.description}
+            </p>
           )}
         </div>
+
         <span
           data-testid={`habit-streak-${slug}`}
-          className="text-sm font-medium"
+          className="shrink-0 rounded-full bg-cream px-3 py-1 text-xs font-medium border border-warm"
         >
           🔥 {streak}
         </span>
       </header>
-      <div className="mt-3 flex flex-wrap gap-2">
+
+      <div className="mt-auto pt-4 flex flex-wrap gap-2">
         <button
           data-testid={`habit-complete-${slug}`}
           type="button"
           onClick={() => onToggleToday(habit.id)}
-          className="rounded bg-blue-600 px-3 py-1 text-sm text-white"
+          className={`rounded-xl px-3 sm:px-4 py-2 text-sm font-medium transition
+            ${
+              completedToday
+                ? "bg-cream text-ink border border-warm"
+                : "bg-accent-sage text-white hover:opacity-90"
+            }`}
         >
-          {completedToday ? "Unmark today" : "Complete today"}
+          {completedToday ? "Undo" : "Complete"}
         </button>
+
         <button
-          data-testid={`habit-edit-${slug}`}
           type="button"
           onClick={() => onEdit(habit.id)}
-          className="rounded border px-3 py-1 text-sm"
+          className="rounded-xl border border-warm bg-card px-3 sm:px-4 py-2 text-sm text-ink hover:bg-cream"
         >
           Edit
         </button>
+
         <button
-          data-testid={`habit-delete-${slug}`}
           type="button"
           onClick={() => setConfirming(true)}
-          className="rounded border border-red-400 px-3 py-1 text-sm text-red-600"
+          className="rounded-xl border border-red-200 bg-red-50 px-3 sm:px-4 py-2 text-sm text-red-600 hover:bg-red-100"
         >
           Delete
         </button>
       </div>
+
       {confirming && (
-        <div
-          role="alertdialog"
-          aria-modal="true"
-          className="mt-3 rounded border border-red-300 bg-red-50 p-3"
-        >
-          <p className="text-sm">Delete this habit?</p>
-          <div className="mt-2 flex gap-2">
+        <div className="mt-4 rounded-xl border border-warm bg-card p-4 shadow-soft">
+          <p className="text-sm text-ink">Delete this habit?</p>
+
+          <div className="mt-3 flex gap-2">
             <button
-              data-testid="confirm-delete-button"
-              type="button"
               onClick={() => {
                 setConfirming(false);
                 onDelete(habit.id);
               }}
-              className="rounded bg-red-600 px-3 py-1 text-sm text-white"
+              className="rounded-xl bg-red-600 px-3 py-2 text-sm text-white"
             >
-              Confirm delete
+              Delete
             </button>
+
             <button
-              type="button"
               onClick={() => setConfirming(false)}
-              className="rounded border px-3 py-1 text-sm"
+              className="rounded-xl border border-warm px-3 py-2 text-sm"
             >
               Cancel
             </button>

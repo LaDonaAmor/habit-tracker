@@ -20,51 +20,64 @@ export default function SignupForm() {
       setError(res.error ?? "An unexpected error occurred");
       return;
     }
+
     setTimeout(() => {
       router.push(ROUTES.DASHBOARD);
     }, 0);
   }
 
   return (
-    <form onSubmit={onSubmit} className="mx-auto max-w-sm space-y-4 p-6">
-      <h1 className="block">Sign up</h1>
-      <label htmlFor="email-input">
-        <span className="block text-sm">Email</span>
-        <input
-          type="email"
-          data-testid="auth-signup-email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 w-full rounded border px-3 py-2"
-        />
-      </label>
-      <label className="block">
-        <span className="block text-sm">Password</span>
-        <input
-          type="password"
-          data-testid="auth-signup-password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="mt-1 w-full rounded border px-3 py-2"
-        />
-      </label>
-      {error && (
-        <p role="alert" className="text-sm text-red-600">
-          {error}
-        </p>
-      )}
-      <button
-        data-testid="auth-signup-submit"
-        type="submit"
-        className="w-full rounded bg-blue-600 py-2 text-white"
+    <div className="flex min-h-screen items-center justify-center bg-cream px-4">
+      <form
+        onSubmit={onSubmit}
+        className="bg-card w-full max-w-md space-y-5 p-6 card-hover"
       >
-        Sign up
-      </button>
-      <p className="text-sm">
-        Have an account? <Link href="/login">Log in</Link>
-      </p>
-    </form>
+        <div>
+          <h1 className="text-2xl font-bold">Create account</h1>
+          <p className="text-muted text-sm">Start building better habits</p>
+        </div>
+
+        <label className="block">
+          <span className="text-sm text-muted">Email</span>
+          <input
+            type="email"
+            data-testid="auth-signup-email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="mt-1 w-full"
+          />
+        </label>
+
+        <label className="block">
+          <span className="text-sm text-muted">Password</span>
+          <input
+            type="password"
+            data-testid="auth-signup-password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="mt-1 w-full"
+          />
+        </label>
+
+        {error && <p className="text-sm text-red-400">{error}</p>}
+
+        <button
+          data-testid="auth-signup-submit"
+          type="submit"
+          className="btn-primary w-full"
+        >
+          Sign up
+        </button>
+
+        <p className="text-sm text-muted">
+          Have an account?{" "}
+          <Link className="text-sky-400 hover:underline" href="/login">
+            Log in
+          </Link>
+        </p>
+      </form>
+    </div>
   );
 }

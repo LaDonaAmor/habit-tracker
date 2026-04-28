@@ -20,27 +20,36 @@ export default function HabitList({
     return (
       <div
         data-testid="empty-state"
-        className="rounded border border-dashed p-8 text-center text-gray-600"
+        className="mx-auto flex max-w-md flex-col items-center justify-center rounded-2xl border border-warm bg-card p-12 text-center shadow-soft mt-10"
       >
-        No habits yet. Create your first one!
+        <h3 className="font-serif text-2xl text-ink">No habits yet</h3>
+        <p className="mt-3 text-muted">
+          Start small. Create your first habit and build consistency step by
+          step.
+        </p>
       </div>
     );
   }
+
   return (
-    <ul
-      className="grid gap-3 md:grid-cols-2 lg:grid-cols-3"
-      data-testid="habit-list"
-    >
-      {habits.map((h) => (
-        <li key={h.id}>
-          <HabitCard
-            habit={h}
-            onToggleToday={onToggleToday}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        </li>
-      ))}
-    </ul>
+    <div className="w-full p-2">
+      <ul
+        data-testid="habit-list"
+        className="
+         mx-auto flex max-w-md flex-col gap-6 items-center justify-center rounded-2xl border border-warm bg-card p-12 text-center shadow-soft mt-10 
+        "
+      >
+        {habits.map((h) => (
+          <li key={h.id} className="h-full">
+            <HabitCard
+              habit={h}
+              onToggleToday={onToggleToday}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

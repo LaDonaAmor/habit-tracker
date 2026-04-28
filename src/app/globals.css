@@ -1,26 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Base UI */
+  --color-cream: #0f172a;
+  --color-card: #1e293b;
+  --color-ink: #f8fafc;
+  --color-muted: #94a3b8;
+  --color-border-warm: #334155;
+
+  /* Accents */
+  --color-accent-peach: #38bdf8;
+  --color-accent-sage: #22c55e;
+  --color-accent-rose: #f472b6;
+
+  --radius-2xl: 1.25rem;
+  --radius-xl: 1rem;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+
+  --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 14px 40px rgba(56, 189, 248, 0.18);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Background */
+@utility bg-cream {
+  background: radial-gradient(
+    circle at top,
+    #1e293b 0%,
+    var(--color-cream) 60%
+  );
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Card */
+@utility bg-card {
+  background: var(--color-card);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-border-warm);
+  border-radius: var(--radius-2xl);
+  transition: all 0.25s ease;
 }
 
+/* Hover card */
+@utility card-hover {
+  transition: all 0.25s ease;
+}
+.card-hover:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-accent-peach);
+  transform: translateY(-3px);
+}
+
+/* Text */
+@utility text-ink {
+  color: var(--color-ink);
+}
+
+@utility text-muted {
+  color: var(--color-muted);
+}
+
+/* Buttons (new utility feel) */
+@utility btn-primary {
+  background: linear-gradient(135deg, #38bdf8, #22c55e);
+  color: white;
+  border-radius: var(--radius-xl);
+  padding: 0.6rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+}
+
+/* Inputs */
+input,
+textarea {
+  border: 1px solid var(--color-border-warm);
+  border-radius: var(--radius-xl);
+  background: #0b1220;
+  color: var(--color-ink);
+  padding: 0.6rem 0.75rem;
+}
+
+/* Focus */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+/* Base */
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
 }
