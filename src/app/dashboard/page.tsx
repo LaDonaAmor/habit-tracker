@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 
 import type { Session } from "@/types/auth";
 import type { Habit } from "@/types/habit";
 
 import { storage } from "@/lib/storage";
 import { toggleHabitCompletion } from "@/lib/habits";
-import { ROUTES } from "@/lib/constants";
 
 import HabitList from "@/components/habits/HabitList";
 import HabitForm from "@/components/habits/HabitForm";
 import LogoutButton from "@/components/auth/LogoutButton";
+import ProtectedRoute from "@/components/shared/ProtectedRoute";
 
 const todayISO = () => new Date().toISOString().slice(0, 10);
 const uid = () =>
@@ -21,17 +20,10 @@ const uid = () =>
     : Math.random().toString(36).slice(2) + Date.now().toString(36);
 
 export default function DashboardPage() {
-  const router = useRouter();
   const [session] = useState<Session | null>(() => storage.getSession());
   const [habits, setHabits] = useState<Habit[]>(() => storage.getHabits());
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!session) {
-      router.replace(ROUTES.LOGIN);
-    }
-  }, [session, router]);
 
   const myHabits = useMemo(
     () => (session ? habits.filter((h) => h.userId === session.userId) : []),
@@ -90,49 +82,52 @@ export default function DashboardPage() {
     );
   }
 
-  if (!session) return null;
-
   const editing = editingId ? myHabits.find((h) => h.id === editingId) : null;
 
   return (
-    <main
-      data-testid="dashboard-page"
-      className="mx-auto max-w-2xl space-y-4 p-4"
-    >
-      <header className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Your habits</h1>
-        <LogoutButton />
-      </header>
+    <ProtectedRoute>
+      <main
+        data-testid="dashboard-page"
+        className="mx-auto max-w-2xl space-y-4 p-4"
+      >
+        <header className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold">Your habits</h1>
+          <LogoutButton />
+        </header>
 
-      {!showForm && !editing && (
-        <button
-          data-testid="create-habit-button"
-          type="button"
-          onClick={() => setShowForm(true)}
-          className="rounded bg-blue-600 px-4 py-2 text-white"
-        >
-          + New habit
-        </button>
-      )}
+        {!showForm && !editing && (
+          <button
+            data-testid="create-habit-button"
+            type="button"
+            onClick={() => setShowForm(true)}
+            className="rounded bg-blue-600 px-4 py-2 text-white"
+          >
+            + New habit
+          </button>
+        )}
 
-      {showForm && (
-        <HabitForm onSave={handleCreate} onCancel={() => setShowForm(false)} />
-      )}
+        {showForm && (
+          <HabitForm
+            onSave={handleCreate}
+            onCancel={() => setShowForm(false)}
+          />
+        )}
 
-      {editing && (
-        <HabitForm
-          initial={editing}
-          onSave={handleEditSave}
-          onCancel={() => setEditingId(null)}
+        {editing && (
+          <HabitForm
+            initial={editing}
+            onSave={handleEditSave}
+            onCancel={() => setEditingId(null)}
+          />
+        )}
+
+        <HabitList
+          habits={myHabits}
+          onToggleToday={handleToggleToday}
+          onEdit={(id) => setEditingId(id)}
+          onDelete={handleDelete}
         />
-      )}
-
-      <HabitList
-        habits={myHabits}
-        onToggleToday={handleToggleToday}
-        onEdit={(id) => setEditingId(id)}
-        onDelete={handleDelete}
-      />
-    </main>
+      </main>
+    </ProtectedRoute>
   );
 }

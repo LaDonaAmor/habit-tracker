@@ -20,7 +20,10 @@ export default function LoginForm() {
       setError(res.error ?? "An unexpected error occurred");
       return;
     }
-    router.push(ROUTES.DASHBOARD);
+
+    setTimeout(() => {
+      router.push(ROUTES.DASHBOARD);
+    }, 0);
   }
 
   return (
