@@ -92,7 +92,10 @@ export default function DashboardPage() {
 
   return (
     <ProtectedRoute>
-      <main className="min-h-screen bg-cream px-4 py-8">
+      <main
+        data-testid="dashboard-page"
+        className="min-h-screen bg-cream px-4 py-8"
+      >
         <div className="mx-auto max-w-3xl space-y-6">
           <header className="bg-card flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
             <div className="flex items-center gap-3">

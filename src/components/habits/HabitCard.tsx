@@ -84,6 +84,7 @@ export default function HabitCard({
         </button>
 
         <button
+          data-testid={`habit-edit-${slug}`}
           type="button"
           onClick={() => onEdit(habit.id)}
           className="cursor-pointer
@@ -97,6 +98,7 @@ export default function HabitCard({
         </button>
 
         <button
+          data-testid={`habit-delete-${slug}`}
           type="button"
           onClick={() => setConfirming(true)}
           className="cursor-pointer
@@ -116,6 +118,7 @@ export default function HabitCard({
 
           <div className="mt-3 flex gap-2">
             <button
+              data-testid="confirm-delete-button"
               onClick={() => {
                 setConfirming(false);
                 onDelete(habit.id);
@@ -126,6 +129,7 @@ export default function HabitCard({
             </button>
 
             <button
+              data-testid="cancel-delete-button"
               onClick={() => setConfirming(false)}
               className="cursor-pointer rounded-lg border border-warm px-3 py-1.5 text-sm"
             >
