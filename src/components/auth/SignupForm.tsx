@@ -20,7 +20,9 @@ export default function SignupForm() {
       setError(res.error ?? "An unexpected error occurred");
       return;
     }
-    router.push(ROUTES.DASHBOARD);
+    setTimeout(() => {
+      router.push(ROUTES.DASHBOARD);
+    }, 0);
   }
 
   return (
