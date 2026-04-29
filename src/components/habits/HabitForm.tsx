@@ -42,7 +42,7 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
       className="space-y-5 rounded-2xl border border-warm bg-card p-6 shadow-soft"
     >
       <div>
-        <h2 className="font-serif text-xl text-ink">
+        <h2 className="font-serif text-xl text-ink font-black">
           {initial ? "Edit Habit" : "Create Habit"}
         </h2>
         <p className="mt-1 text-sm text-muted">
@@ -51,7 +51,7 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
       </div>
 
       <label className="block">
-        <span className="text-sm font-medium text-ink">Habit name</span>
+        <span className="text-sm font-bold text-ink">Habit name</span>
         <input
           id="habit-name"
           data-testid="habit-name-input"
@@ -63,7 +63,7 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-ink">Description</span>
+        <span className="text-sm font-bold text-ink">Description</span>
         <input
           data-testid="habit-description-input"
           value={description}
@@ -74,7 +74,7 @@ export default function HabitForm({ initial, onSave, onCancel }: Props) {
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-ink">Frequency</span>
+        <span className="text-sm font-bold text-ink">Frequency</span>
         <select
           data-testid="habit-frequency-select"
           value="daily"
