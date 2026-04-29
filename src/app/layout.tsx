@@ -25,7 +25,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-app text-ink">
-        {" "}
         <div className="fixed right-4 top-4 z-50"></div>
         {children}
         <PWARegister />

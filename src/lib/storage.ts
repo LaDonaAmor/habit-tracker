@@ -1,7 +1,5 @@
 import type { User, Session } from "@/types/auth";
-
 import type { Habit } from "@/types/habit";
-
 import { STORAGE_KEYS } from "./constants";
 
 const isBrowser = () => typeof window !== "undefined";

@@ -6,8 +6,6 @@ const yesterday = "2025-04-26";
 const twoDaysAgo = "2025-04-25";
 const threeDaysAgo = "2025-04-24";
 
-/* MENTOR_TRACE_STAGE3_HABIT_A91 */
-
 describe("calculateCurrentStreak", () => {
   it("returns 0 when completions is empty", () => {
     expect(calculateCurrentStreak([], today)).toBe(0);
