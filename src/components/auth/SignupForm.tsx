@@ -72,7 +72,7 @@ export default function SignupForm() {
         </button>
 
         <p className="text-sm text-muted">
-          Have an account?{" "}
+          Have an account?
           <Link className="text-sky-400 hover:underline" href="/login">
             Log in
           </Link>

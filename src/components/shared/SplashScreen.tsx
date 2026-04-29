@@ -7,7 +7,6 @@ export default function SplashScreen() {
       className="flex min-h-screen items-center justify-center bg-cream"
     >
       <div className="flex flex-col items-center gap-4 rounded-2xl border border-warm bg-card px-10 py-8 shadow-soft">
-        {/* App Name */}
         <h1 className="font-serif text-3xl font-bold text-ink tracking-tight">
           {APP_NAME}
         </h1>

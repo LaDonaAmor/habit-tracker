@@ -74,7 +74,7 @@ export default function LoginForm() {
         </button>
 
         <p className="text-sm text-muted">
-          No account?{" "}
+          No account?
           <Link className="text-sky-400 hover:underline" href="/signup">
             Sign up
           </Link>

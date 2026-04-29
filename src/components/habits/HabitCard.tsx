@@ -25,6 +25,18 @@ export default function HabitCard({
   const completedToday = habit.completions.includes(getTodayISO());
   const [confirming, setConfirming] = useState(false);
 
+  const [isExpanded, setIsExpanded] = useState(false);
+  const toggleReadMore = () => setIsExpanded(!isExpanded);
+
+  const handleEditClick = () => {
+    onEdit(habit.id);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <article
       data-testid={`habit-card-${slug}`}
@@ -45,17 +57,30 @@ export default function HabitCard({
               {habit.name}
 
               <span
-                className={`
-        absolute left-0 top-[55%] h-0.5 w-full bg-success/70 transition-transform duration-500 origin-left
-        ${completedToday ? "scale-x-100" : "scale-x-0"}
-      `}
+                className={`absolute left-0 top-[55%] h-0.5 w-full bg-success/70 transition-transform duration-500 origin-left 
+                  ${completedToday ? "scale-x-100" : "scale-x-0"}`}
               />
             </span>
           </h3>
           {habit.description && (
-            <p className="mt-1 line-clamp-2 text-sm text-muted">
-              {habit.description}
-            </p>
+            <>
+              <p
+                className={`relative mt-1 text-sm transition-colors duration-300 wrap-break-words whitespace-pre-wrap 
+                  ${completedToday ? "text-muted line-through decoration-success/50" : "text-muted"} 
+                  ${!isExpanded && habit.description.length > 60 ? "line-clamp-2" : ""}`}
+              >
+                {habit.description}
+              </p>
+              {habit.description.length > 60 && (
+                <button
+                  onClick={toggleReadMore}
+                  className={`cursor-pointer text-xs font-medium mt-1 hover:underline block transition-opacity duration-300
+                    ${completedToday ? "opacity-50 text-muted" : "text-primary"}`}
+                >
+                  {isExpanded ? "Show less" : "Read more"}
+                </button>
+              )}
+            </>
           )}
         </div>
 
@@ -86,7 +111,7 @@ export default function HabitCard({
         <button
           data-testid={`habit-edit-${slug}`}
           type="button"
-          onClick={() => onEdit(habit.id)}
+          onClick={handleEditClick}
           className="cursor-pointer
       rounded-xl border border-border
       bg-transparent px-3 py-2 text-sm font-medium text-ink
