@@ -1,23 +1,16 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
 import Image from "next/image";
 
 import type { Session } from "@/types/auth";
-
 import type { Habit } from "@/types/habit";
-
 import { storage } from "@/lib/storage";
-
 import { toggleHabitCompletion } from "@/lib/habits";
 
 import HabitList from "@/components/habits/HabitList";
-
 import HabitForm from "@/components/habits/HabitForm";
-
 import LogoutButton from "@/components/auth/LogoutButton";
-
 import ProtectedRoute from "@/components/shared/ProtectedRoute";
 
 import ThemeToggle from "@/components/shared/ThemeToggle";
@@ -75,7 +68,7 @@ export default function DashboardPage() {
       completions: [],
     };
 
-    persist([...habits, habit]);
+    persist([habit, ...habits]);
 
     setShowForm(false);
   }
